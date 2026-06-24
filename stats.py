@@ -15,9 +15,12 @@ def get_word_count(text: str) -> int:
     return len(text.split())
 
 
-def sort_character_counts(counts: dict[str, int]) -> list[dict[str, int | str]]:
-    sorted_counts: list[dict[str, int | str]] = [
-        {"char": k, "num": v} for k, v in sorted(counts.items(), key=lambda item: item[1], reverse=True)
-    ]
-    
-    return sorted_counts
+def sort_on(t: tuple[str, int]) -> int:
+    return t[1]
+
+
+def chars_dict_to_sorted_list(counts: dict[str, int]) -> list[tuple[str, int]]:
+    char_list: list[tuple[str, int]] = []
+    for char in counts:
+        char_list.append((char, counts[char]))
+    return sorted(char_list, key=sort_on, reverse=True)
